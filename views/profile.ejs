@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        background-color: #1c1c25f6;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      #profile div {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 30px;
+        padding: 10px;
+        margin: 110px auto;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        width: 870px;
+        height: 450px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        background-color: rgba(255, 255, 255, 0.05);
+        filter: blur(0.2px);
+      }
+      #profile div::before {
+        content: "";
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50% 20px;
+        opacity: 0.8;
+        top: -17%;
+        left: 91%;
+        background: linear-gradient(#aaffa9, #11ffbd);
+      }
+      #profile div::after {
+        content: "";
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50% 20px;
+        opacity: 0.8;
+        bottom: -17%;
+        left: -8%;
+        background: linear-gradient(#0098f0, #0457d3);
+      }
+      #profile img {
+        border: double 5px transparent;
+        border-radius: 50%;
+        background-image: linear-gradient(white, white),
+          linear-gradient(to right, #ee00ff, #fbff00);
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        width: 170px;
+        height: 170px;
+        margin-top: 130px;
+        margin-left: 80px;
+      }
+      #profile div h1 {
+        padding-left: 392px;
+        margin-top: -225px;
+        font-size: 24px;
+        color: white;
+        font-weight: 500;
+      }
+      #profile div h2 {
+        padding-left: 392px;
+        margin-top: 22px;
+        color: white;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      #profile div h3 {
+        padding-left: 392px;
+        margin-top: 22px;
+        color: white;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      #profile div h4 {
+        padding-left: 392px;
+        margin-top: 22px;
+        color: white;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      #profile div h5 {
+        padding-left: 392px;
+        margin-top: 22px;
+        color: white;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      #profile div h6 {
+        padding-left: 392px;
+        margin-top: 22px;
+        color: white;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      input[type="text" i],input[type="number" i],input[type="url" i],input[type="submit" i]{
+        padding: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/profile/create" method="post">
+      <input type="url" name="image" placeholder="image" />
+      <input type="text" name="name" placeholder="name" />
+      <input type="text" name="passion" placeholder="passion" />
+      <input type="number" name="age" placeholder="age" />
+      <input type="number" name="mobile" placeholder="mobile" />
+      <input type="text" name="email" placeholder="email" />
+      <input type="text" name="address" placeholder="address" />
+      <input type="submit" />
+    </form>
+
+    <div id="profile"></div>
+  </body>
+
+  <script>
+    fetch("/profile/profiles")
+      .then((res) => res.json())
+      .then((data) => {
+        data.map((ele) => {
+          let img = document.createElement("img");
+          img.src = ele.image;
+          let name = document.createElement("h1");
+          name.innerHTML = ` Name : ${ele.name}`;
+          let passion = document.createElement("h6");
+          passion.innerHTML = ` Passion : ${ele.passion}`;
+          let age = document.createElement("h2");
+          age.innerHTML = ` Age : ${ele.age}`;
+          let mobile = document.createElement("h3");
+          mobile.innerHTML = ` Mobile : ${ele.mobile}`;
+          let email = document.createElement("h4");
+          email.innerHTML = ` E-mail : ${ele.email}`;
+          let address = document.createElement("h5");
+          address.innerHTML = ` Address : ${ele.address}`;
+
+          let div = document.createElement("div");
+          div.append(img, name, passion, age, mobile, email, address);
+          document.getElementById("profile").append(div);
+        });
+      });
+  </script>
+</html>
